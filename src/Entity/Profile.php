@@ -26,6 +26,11 @@ class Profile
         return $this->role;
     }
 
+    public function getRoleName(): string
+    {
+        return RoleEnum::tryFrom($this->role)->name;
+    }
+
     public function setRole(string $role): static
     {
         $this->role = $role;

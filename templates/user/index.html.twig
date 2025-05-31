@@ -10,9 +10,9 @@
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Name</th>
                 <th>Phone</th>
+                <th>Profile</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,17 +21,17 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.phone }}</td>
+                <td>{{ user.profile.getRoleName }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a> |
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">No users found</td>
             </tr>
         {% endfor %}
         </tbody>

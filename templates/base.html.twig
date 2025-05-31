@@ -24,6 +24,41 @@
                     Technical Test
                 </a>
                 <!-- END NAVBAR LOGO -->
+                <ul class="navbar-nav" aria-label="Menu list">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('app_user_index') }}">
+                        <span class="nav-link-icon"
+                            ><!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-1"><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                        </span>
+                        <span class="nav-link-title"> Users </span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav flex-row order-md-last ms-auto">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link d-flex lh-1 text-reset" data-bs-toggle="dropdown" aria-label="Open user dropdown">
+                                <div class="d-none d-xl-block ps-2">
+                                    <div>{{ app.user.email }}</div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <a href="{{ url('app_user_show', {id: app.user.id}) }}" class="dropdown-item">Profile</a>
+                            <a href="{{ url('app_logout') }}" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="nav-item">
+                            <a href="{{ url('app_login') }}" class="nav-link d-flex lh-1 text-reset p-0">
+                                <div class="d-none d-xl-block ps-2">
+                                    <div>Login</div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </header>
         {% block body %}{% endblock %}
