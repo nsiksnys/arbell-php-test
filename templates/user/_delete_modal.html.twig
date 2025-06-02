@@ -1,0 +1,17 @@
+<div class="modal fade" id="deleteUser{{ id }}Modal" tabindex="-1" aria-labelledby="deleteUser{{ id }}ModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="deleteUser{{ id }}ModalLabel">Delete user</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                <p>Are you sure you want to delete {{ identifier }}?</p>
+                <form method="post" action="{{ path('app_user_delete', {'id': id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn-primary">Yes, delete</button>
+                </form>
+			</div>
+		</div>
+	</div>
+</div>

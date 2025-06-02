@@ -33,8 +33,10 @@
                     <td>{{ user.phone }}</td>
                     <td>{{ user.profile.getRoleName }}</td>
                     <td>
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a> |
-                        <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                        <a class="btn btn-link" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                        <a class="btn btn-link" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                        <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#deleteUser{{ user.id }}Modal" >delete</button>
+                        {{ include('user/_delete_modal.html.twig', { id: user.id, identifier: user.email }) }}
                     </td>
                 </tr>
             {% else %}
