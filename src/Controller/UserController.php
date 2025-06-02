@@ -109,7 +109,7 @@ final class UserController extends AbstractController
         }
 
         $form = $this->createForm(UserForm::class, $user);
-        $form->remove('password'); // Password is not changed in this view.
+        $form->remove('plaintext_password'); // Password is not changed in this view.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
