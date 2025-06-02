@@ -23,11 +23,12 @@ class UserForm extends AbstractType
                 'label_attr' => [ 'class' => 'form-label'],
                 'attr' => [ 'class' => 'form-control']
             ])
-            ->add('password', PasswordType::class, [
+            ->add('plaintext_password', PasswordType::class, [
                 'label' => 'Password',
                 'required' => true,
                 'label_attr' => [ 'class' => 'form-label'],
-                'attr' => [ 'class' => 'form-control']
+                'hash_property_path' => 'password',
+                'mapped' => false,
             ])
             ->add('name', TextType::class, [
                 'label' => 'Name',

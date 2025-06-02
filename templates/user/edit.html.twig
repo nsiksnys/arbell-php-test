@@ -7,5 +7,7 @@
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
+    <a href="{{ path('app_user_password', {id: user.id}) }}">Change password</a>
+    <br/>
     <a href="{{ path('app_user_index') }}">Back to list</a>
 {% endblock %}

@@ -62,9 +62,9 @@ final class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Get the plain text password and hash it
-            $plaintextPassword = $user->getPassword();
-            $hashedPassword = $passwordHasher->hashPassword($user, $plaintextPassword);
-            $user->setPassword($hashedPassword);
+            // $plaintextPassword = $user->getPassword();
+            // $hashedPassword = $passwordHasher->hashPassword($user, $plaintextPassword);
+            // $user->setPassword($hashedPassword);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -108,6 +108,7 @@ final class UserController extends AbstractController
         }
 
         $form = $this->createForm(UserForm::class, $user);
+        $form->remove('password'); // Password is not changed in this view.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,6 +118,37 @@ final class UserController extends AbstractController
         }
 
         return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/password-change', name: 'app_user_password', methods: ['GET', 'POST'])]
+    public function password(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        // Only authenticated users should access this
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED', null, "A user tried to access route app_user_password without authorization.");
+        if (!$this->isGranted('IS_AUTHENTICATED'))
+        {
+            $this->logger->error("A user tried to access route app_user_password without authorization.");
+            $this->addFlash('danger', "You need to be logged in to access this page");
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $form = $this->createForm(UserForm::class, $user);
+        $form->remove('email');
+        $form->remove('name');
+        $form->remove('profile');
+        $form->remove('phone');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('user/password.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
