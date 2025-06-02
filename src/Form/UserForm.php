@@ -21,7 +21,8 @@ class UserForm extends AbstractType
                 'label' => 'Email',
                 'required' => true,
                 'label_attr' => [ 'class' => 'form-label'],
-                'attr' => [ 'class' => 'form-control']
+                'attr' => [ 'class' => 'form-control'],
+                'row_attr' => ['class' => 'mb-3'],
             ])
             ->add('plaintext_password', PasswordType::class, [
                 'label' => 'Password',
@@ -29,18 +30,22 @@ class UserForm extends AbstractType
                 'label_attr' => [ 'class' => 'form-label'],
                 'hash_property_path' => 'password',
                 'mapped' => false,
+                'attr' => [ 'class' => 'form-control'],
+                'row_attr' => ['class' => 'mb-3'],
             ])
             ->add('name', TextType::class, [
                 'label' => 'Name',
                 'required' => true,
                 'label_attr' => [ 'class' => 'form-label'],
-                'attr' => [ 'class' => 'form-control']
+                'attr' => [ 'class' => 'form-control'],
+                'row_attr' => ['class' => 'mb-3'],
             ])
             ->add('phone', TextType::class, [
                 'label' => 'Phone',
                 'required' => true,
                 'label_attr' => [ 'class' => 'form-label'],
-                'attr' => [ 'class' => 'form-control']
+                'attr' => [ 'class' => 'form-control'],
+                'row_attr' => ['class' => 'mb-3'],
             ])
             ->add('profile', EntityType::class, [
                 'label' => 'Profile',
@@ -50,7 +55,8 @@ class UserForm extends AbstractType
                    },
                 'required' => true,
                 'label_attr' => [ 'class' => 'form-label'],
-                'attr' => [ 'class' => 'form-control']
+                'attr' => [ 'class' => 'form-select'],
+                'row_attr' => ['class' => 'mb-3'],
             ])
         ;
     }
