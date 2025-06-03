@@ -22,20 +22,17 @@ final class Version20250529145057 extends AbstractMigration
             PRIMARY KEY(id)
           ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
       
-        $this->addSql("CREATE TABLE user (
+        $this->addSql('CREATE TABLE user (
             id INT AUTO_INCREMENT NOT NULL,
             profile_id INT DEFAULT NULL,
             email VARCHAR(180) NOT NULL,
             password VARCHAR(255) NOT NULL,
             name VARCHAR(255) NOT NULL,
             phone VARCHAR(255) NOT NULL,
-            created_at DATETIME NOT NULL COMMENT '(DC2Type:datetime_immutable)',
-            updated_at DATETIME NOT NULL COMMENT '(DC2Type:datetime_immutable)',
-            deleted_at DATETIME DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
             INDEX IDX_8D93D649CCFA12B8 (profile_id),
             UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email),
             PRIMARY KEY(id)
-          ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB");
+          ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
 
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649CCFA12B8 FOREIGN KEY (profile_id) REFERENCES profile (id)');
     }
