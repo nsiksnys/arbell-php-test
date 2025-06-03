@@ -16,8 +16,8 @@ final class Version20250602215010 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql("INSERT INTO `user` (`id`, `profile_id`, `email`, `password`, `name`, `phone`) VALUES
-            (1, 1, 'admin@example.com', '\$2y\$13\$tA3ZzOWYdQKTvHQ0wFDpCusFKPBYPLxjk96nISGewiCVjo0NCDze6', 'Test Admin User', '111111111')");
+        $this->addSql("INSERT INTO `user` (`id`, `profile_id`, `email`, `password`, `name`, `phone`, `created_at`, `updated_at`) VALUES
+            (1, 1, 'admin@example.com', '\$2y\$13\$tA3ZzOWYdQKTvHQ0wFDpCusFKPBYPLxjk96nISGewiCVjo0NCDze6', 'Test Admin User', '111111111', NOW(), NOW())");
     }
 
     public function down(Schema $schema): void
