@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
+use App\State\UserPasswordHasher;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,6 +21,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new Get(),
         new GetCollection(),
+        new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user_write']]),
+        new Put(processor: UserPasswordHasher::class),
+        new Delete()
     ],
     normalizationContext: ['groups' => ['user_read']],
     denormalizationContext: ['groups' => ['user_write']],
@@ -48,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[Groups(['user_write'])]
+    private ?string $plaintextPassword = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user_read', 'user_write'])]
@@ -130,13 +137,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlaintextPassword(): ?string
+    {
+        return $this->plaintextPassword;
+    }
+
+    public function setPlaintextPassword(string $plaintextPassword): static
+    {
+        $this->plaintextPassword = $plaintextPassword;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plaintextPassword = null;
     }
 
     public function getName(): ?string
