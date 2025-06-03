@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
@@ -18,12 +18,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[ApiResource(
+    security: "is_granted('IS_AUTHENTICATED')",
+    securityMessage: "You need to be logged in to access this page",
     operations: [
         new Get(),
         new GetCollection(),
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user_write']]),
-        new Put(processor: UserPasswordHasher::class),
-        new Delete()
+        new Patch(processor: UserPasswordHasher::class),
+        new Delete(security: "is_granted('ROLE_ADMIN')", securityMessage: "You are not allowed to perform this operation")
     ],
     normalizationContext: ['groups' => ['user_read']],
     denormalizationContext: ['groups' => ['user_write']],
