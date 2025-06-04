@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -25,7 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new GetCollection(),
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user_write']]),
         new Patch(processor: UserPasswordHasher::class),
-        new Delete(security: "is_granted('ROLE_ADMIN')", securityMessage: "You are not allowed to perform this operation")
+        new Delete(security: "is_granted('". RoleEnum::ADMIN->value ."')", securityMessage: "You are not allowed to perform this operation")
     ],
     normalizationContext: ['groups' => ['user_read']],
     denormalizationContext: ['groups' => ['user_write']],
@@ -40,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     #[Groups(['user_read', 'user_write'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     /**
@@ -56,14 +58,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Groups(['user_write'])]
+    #[Assert\NoSuspiciousCharacters]
     private ?string $plaintextPassword = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user_read', 'user_write'])]
+    #[Assert\NoSuspiciousCharacters]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user_read', 'user_write'])]
+    #[Assert\NoSuspiciousCharacters]
     private ?string $phone = null;
 
     public function getId(): ?int
