@@ -6,9 +6,9 @@ Created with
 * API Platform 4.1
 
 Also used
-* MariaDB
-* Symfony Profiler
-* LexikJWTAuthenticationBundle for JWT (JSON Web Token) authentication
+* [MariaDB](https://mariadb.org)
+* [Symfony Profiler](https://symfony.com/doc/current/profiler.html)
+* [LexikJWTAuthenticationBundle](https://github.com/lexik/LexikJWTAuthenticationBundle) for JWT (JSON Web Token) authentication
 
 ## Branch
 This is the `rest-api` branch, which contains a REST API for basic User CRUD operations.
@@ -58,7 +58,7 @@ Test data consists of the two profiles, one with role `ROLE_ADMIN` and other wit
 ## Running locally
 For local development, we can use the [Symfony binary](https://symfony.com/download) to run the local server.
 
-Once the binary is installed, run `symfony server:start`. If this does not work, check where the symfony binary is located. For Linux systems the default location is `$HOME/.symfony/bin`.
+Once the binary is installed, run `php bin/console asset-map:compile --no-debug` to compile all assets, followed by `symfony server:start`. If this last command does not work, check where the symfony binary is located. For Linux systems the default location is `$HOME/.symfony/bin`.
 
 By default, the api is available at `http://localhost:8000/api`. If you enter this url in a browser you will be redirected to the OpenAPI documentation.
 
@@ -70,10 +70,9 @@ If you get the following error after starting the server
 
     Error thrown while running command "asset-map:compile --no-debug". Message: "Unable to find asset "./path/to/domAnimations" imported from "[PROJECT_DIR]/vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js
 
-This is a bug already documented here [Asset mapper warnings #6377 - api-platform/core](https://github.com/api-platform/core/issues/6377). If you get a blank screen or error message when trying to access the API docs, go to the file `vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js` and remove the following lines 
+This is a bug already documented in [Asset mapper warnings #6377 - api-platform/core](https://github.com/api-platform/core/issues/6377). There is a patch that should be applied successfully with composer. However, if you still get a blank screen or error message when trying to access the API docs, apply the patch in `patches/api-platform-6377-graphiql.patch` using git or remove the lines manually.
 
-![Remove lines from file](/screenshots/Remove-commented-code-grapiql-min-js.png)
-Run `composer install` to run all the post installation scripts, start the server again and then go to `http://localhost:8000/api` and check the docs load normally.
+Run `composer install` to run all the post installation scripts, compile the assets once more with `php bin/console asset-map:compile --no-debug`, start the server again and then go to `http://localhost:8000/api` and check the docs load normally.
 
 ## User permissions
 * The `/profiles` endpoint is unprotected and only allows GET requests.
@@ -88,7 +87,7 @@ Here is a quick overview of the available operations in this REST API.
 ![API documentation](/screenshots/API%20documentation.png)
 
 ## Examples (done with Imsomnia)
-Requests available at insomnia_api_requests.yml
+Requests available at `insomnia_api_requests.yml`
 
 ### Login (get authorization token)
 ![POST auth](/screenshots/Login%20request.png)

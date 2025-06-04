@@ -1,0 +1,35 @@
+diff --git a/vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js b/vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js
+index c2f98bc..9db9545 100644
+--- a/vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js
++++ b/vendor/api-platform/symfony/Bundle/Resources/public/graphiql/graphiql.min.js
+@@ -37775,30 +37775,6 @@ function MotionConfig(_a) {
+  * `LazyMotion` can then be used to either synchronously or asynchronously
+  * load animation and gesture support.
+  *
+- * ```jsx
+- * // Synchronous loading
+- * import { LazyMotion, m, domAnimations } from "framer-motion"
+- *
+- * function App() {
+- *   return (
+- *     <LazyMotion features={domAnimations}>
+- *       <m.div animate={{ scale: 2 }} />
+- *     </LazyMotion>
+- *   )
+- * }
+- *
+- * // Asynchronous loading
+- * import { LazyMotion, m } from "framer-motion"
+- *
+- * function App() {
+- *   return (
+- *     <LazyMotion features={() => import('./path/to/domAnimations')}>
+- *       <m.div animate={{ scale: 2 }} />
+- *     </LazyMotion>
+- *   )
+- * }
+- * ```
+- *
+  * @public
+  */
+ function LazyMotion(_a) {
