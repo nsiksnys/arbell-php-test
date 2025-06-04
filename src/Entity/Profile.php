@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
     #[ORM\Column(length: 255)]
     #[Groups(['user_read', 'profile_read'])]
-    private ?string $role = RoleEnum::USER->value;
+    private ?string $role = 'ROLE_USER';
 
     public function getId(): ?int
     {

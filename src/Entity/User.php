@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new GetCollection(),
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user_write']]),
         new Patch(processor: UserPasswordHasher::class),
-        new Delete(security: "is_granted('". RoleEnum::ADMIN->value ."')", securityMessage: "You are not allowed to perform this operation")
+        new Delete(security: "is_granted('ROLE_ADMIN')", securityMessage: "You are not allowed to perform this operation")
     ],
     normalizationContext: ['groups' => ['user_read']],
     denormalizationContext: ['groups' => ['user_write']],
