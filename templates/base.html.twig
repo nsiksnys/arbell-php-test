@@ -7,34 +7,43 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
         {% endblock %}
-
+    </head>
+    <body>
         {% block javascripts %}
             <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
         {% endblock %}
-    </head>
-    <body>
-        <!-- Navbar -->
-        <header class="navbar navbar-expand-md d-print-none">
-            <div class="container-xl">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- BEGIN NAVBAR LOGO -->
-                <a href="{{ url('app_home') }}" aria-label="Logo" class="navbar-brand navbar-brand-autodark me-3">
-                    Technical Test
-                </a>
-                <!-- END NAVBAR LOGO -->
+
+        <div class="page">
+            <!-- Navbar -->
+            <header class="navbar navbar-expand-lg d-print-none">
+                <div class="container-xl">
+                    <!-- BEGIN NAVBAR LOGO -->
+                    <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal ps-0 ps-md-1">
+                        <a href="{{ url('app_home') }}" aria-label="Logo">
+                            Technical Test
+                        </a>
+                    </div>
+                    <!-- END NAVBAR LOGO -->
+                    <!-- Begin toggle button for mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- End toggle button for mobile -->
+                </div>
+            </header>
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="container">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
             </div>
-        </header>
-        {% block body %}{% endblock %}
+        </div>
+        <footer class="page-wrapper text-muted">
+            <div class="container">
+                <p class="mb-1">©Nadia Siksnys, 2025</p>
+                <p class="mb-0">Powered by Symfony 7.3, Tabler 1.3.2 and API Platform 4.1</p>
+            </div>
+        </footer>
     </body>
-    <footer class="text-muted py-5">
-	<div class="container">
-		<p class="float-end mb-1">
-		<a href="#">Go up</a>
-		</p>
-		<p class="mb-1">©Nadia Siksnys, 2025</p>
-		<p class="mb-0">Powered by Symfony 7.3 and Tabler 1.3.2</p>
-	</div>
-	</footer>
 </html>
