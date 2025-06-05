@@ -2,8 +2,8 @@
 Technical test done in May/June 2025
 
 Created with
-* Symfony 7.3
-* API Platform 4.1
+* [Symfony 7.3](https://symfony.com)
+* [API Platform 4.1](https://api-platform.com)
 
 Also used
 * [MariaDB](https://mariadb.org)
@@ -28,7 +28,11 @@ To generate the public and private keys used for signing JWT tokens, run `php bi
 Note: doctrine_migration_versions is an internal table used to keep track of executed migrations.
 
 ## Environment variables
-All envirnoment variables are managed using a .env file. In this case we need to set up at least two variables before running the project for the first time
+All envirnoment variables are managed using a .env file.
+
+This proyect comes with an example `.env`. Symfony allows `.env.[ENVIRONMENT_NAME]` files, to store variables of a specific environment.
+
+In this case we need to set up before running the project for the first time
 * `APP_ENV` to point which environment we are using. By default is set to `dev`.
 * `DATABASE_URL` to connect with the MySql/MariaDB database. The value for MariaDB versions from 10.11.2 is `mysql://[USER]:[PASSWORD]@[DB_URL]:[DB_PORT]/[DB_NAME]?serverVersion=10.11.2-MariaDB&charset=utf8mb4` where
     * `USER` is a valid database engine user, with at least reading and writing permissions
