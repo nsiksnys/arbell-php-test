@@ -36,7 +36,11 @@ In the `rest-api` branch run `php bin/console lexik:jwt:generate-keypair` to gen
 Note: doctrine_migration_versions is an internal table used to keep track of executed migrations.
 
 ## Environment variables
-All envirnoment variables are managed using a .env file. In this case we need to set up at least two variables before running the project for the first time
+All envirnoment variables are managed using a `.env` file.
+
+This proyect comes with an example `.env`. Symfony allows `.env.[ENVIRONMENT_NAME]` files, to store variables of a specific environment.
+
+In this case we need to set up before running the project for the first time.
 * `APP_ENV` to point which environment we are using. By default is set to `dev`.
 * `DATABASE_URL` to connect with the MySql/MariaDB database. The value for MariaDB versions from 10.11.2 is `mysql://[USER]:[PASSWORD]@[DB_URL]:[DB_PORT]/[DB_NAME]?serverVersion=10.11.2-MariaDB&charset=utf8mb4` where
     * `USER` is a valid database engine user, with at least reading and writing permissions
@@ -54,7 +58,7 @@ For older MariaDB versions or other databases, go to [Databases and the Doctrine
     * `JWT_PUBLIC_KEY` defines the location of the public key. Defaults to `%kernel.project_dir%/config/jwt/public.pem`.
     * `JWT_PASSPHRASE` is required for token creation. This variable should be added automatically after generating the keys.
 
-For more information about this package, go to its [official GitHub page](https://github.com/lexik/LexikJWTAuthenticationBundle).
+For more information about this package, go to its [official GitHub repo](https://github.com/lexik/LexikJWTAuthenticationBundle).
 
 ## Test data
 Run `php bin/console doctrine:database:create` to create an empty database. Note that this command will fail if the database user does not have creating permissions.
